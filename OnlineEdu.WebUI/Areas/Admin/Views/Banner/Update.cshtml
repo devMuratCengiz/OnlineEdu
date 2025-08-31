@@ -1,0 +1,20 @@
+﻿@model UpdateBannerDto
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <label>Image Url</label>
+    <input type="text" asp-for="Image" class="form-control" />
+    <br />
+
+    <label>Title</label>
+    <input type="text" asp-for="Title" class="form-control" />
+    <br />
+    <button class="btn btn-outline-primary">Update</button>
+
+</form>
