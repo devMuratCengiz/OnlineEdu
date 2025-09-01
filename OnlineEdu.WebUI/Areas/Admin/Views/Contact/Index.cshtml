@@ -1,30 +1,39 @@
-﻿@model List<ResultBannerDto>
+﻿@model List<ResultContactDto>
 @{
-    ViewData["Title"] = "Banner";
+    ViewData["Title"] = "Contact";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     int count = 0;
 }
+
+
 <table class="table table-hover">
-    <tr>
+    <tr style="font-weight:bold;">
         <th>#</th>
-        <th>Title</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Mail</th>
+        <th>Map URL</th>
     </tr>
 
     @foreach (var item in Model)
     {
         count++;
-        <tr style="font-weight:bold;">
+        <tr>
             <th>@count</th>
-            <td><img src="@item.Image" style="height:75px;width:75px" />  @item.Title</td>
+            <td>@item.Address</td>
+            <td>@item.Phone</td>
+            <td>@item.Email</td>
+            <td><a href="@item.Map" target="_blank"></a></td>
             <td>
                 <button onclick="deleteItem(@item.Id)" class="btn btn-outline-danger">Delete</button>
-                <a asp-action="Update" asp-controller="Banner" asp-area="Admin" asp-route-id="@item.Id" class="btn btn-outline-info">Update</a>
+                <a asp-action="Update" asp-controller="Contact" asp-area="Admin" asp-route-id="@item.Id" class="btn btn-outline-info">Update</a>
             </td>
         </tr>
     }
 </table>
 <br />
-<a asp-action="Create" asp-controller="Banner" asp-area="Admin" class="btn btn-outline-primary">Add</a>
+<a asp-action="Create" asp-controller="Contact" asp-area="Admin" class="btn btn-outline-primary">Add</a>
+
 <script>
 
     function deleteItem(id){

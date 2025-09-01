@@ -11,7 +11,7 @@ namespace OnlineEdu.WebUI.DTOs.BlogDtos
         public string Title { get; set; }
         public string Content { get; set; }
         public string ImageUrl { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
 
         public int BlogCategoryId { get; set; }
     }

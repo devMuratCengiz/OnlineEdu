@@ -1,0 +1,26 @@
+﻿@model CreateCourseCategoryDto
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post">
+    <label>Name</label>
+    <input type="text" asp-for="Name" class="form-control" />
+    <br/>
+
+    <label>Description</label>
+    <input type="text" asp-for="Description" class="form-control" />
+    <br />
+
+    <label>Icon</label>
+    <input type="text" asp-for="Icon" class="form-control" />
+    <br />
+
+    <label>Is Shown</label>
+    <input type="checkbox" asp-for="IsShown" class="form-check" />
+    <br />
+
+    <button class="btn btn-outline-primary">Save</button>
+</form>
+

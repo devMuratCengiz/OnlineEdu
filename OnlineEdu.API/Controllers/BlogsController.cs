@@ -10,12 +10,12 @@ namespace OnlineEdu.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BlogsController(IGenericService<Blog> _service, IMapper _mapper) : ControllerBase
+    public class BlogsController(IMapper _mapper, IBlogService _service) : ControllerBase
     {
         [HttpGet]
         public IActionResult Get()
         {
-            var values = _service.TGetList();
+            var values = _service.TGetBlogsWithCategories();
             return Ok(values);
         }
 

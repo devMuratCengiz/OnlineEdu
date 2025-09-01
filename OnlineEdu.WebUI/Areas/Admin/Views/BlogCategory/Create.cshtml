@@ -1,0 +1,17 @@
+﻿@model CreateBlogCategoryDto
+@{
+    ViewData["Title"] = "Create Blog Category";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<form method="post">
+
+    <label>Title Url</label>
+    <input type="text" asp-for="Name" class="form-control" />
+    <br />
+
+
+    <button class="btn btn-outline-primary">Save</button>
+
+</form>
