@@ -15,9 +15,6 @@ namespace OnlineEdu.API.Extensions
             
             services.AddScoped<IBlogRepository, BlogRepository>();
             services.AddScoped<IBlogService, BlogManager>();
-            
-            services.AddScoped<ICourseCategoryRepository, CourseCategoryRepository>();
-            services.AddScoped<ICourseCategoryService, CourseCategoryManager>();
         }
     }
 }

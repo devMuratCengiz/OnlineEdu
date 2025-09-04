@@ -1,0 +1,50 @@
+﻿@model List<ResultMessageDto>
+@{
+    ViewData["Title"] = "Message";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<table class="table table-hover">
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Subject</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr style="font-weight:bold;">
+            <th>@count</th>
+            <th>@item.FullName</th>
+            <th>@item.Email</th>
+            <th>@item.Subject</th>
+            <td>
+                <button onclick="deleteItem(@item.Id)" class="btn btn-outline-danger">Delete</button>
+                <a asp-action="MessageDetail" asp-controller="Message" asp-area="Admin" asp-route-id="@item.Id" class="btn btn-outline-info">Show Message</a>
+            </td>
+        </tr>
+    }
+</table>
+<br />
+<script>
+
+    function deleteItem(id){
+        Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+
+        var controllerName = "@ViewData["Title"]"
+        window.location.href = "/Admin/"+controllerName+"/Delete/" + id;
+
+    });
+    }
+</script>

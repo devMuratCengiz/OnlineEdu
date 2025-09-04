@@ -1,0 +1,131 @@
+﻿@model UserRegisterDto
+@{
+    Layout = "~/Views/UILayout/Layout.cshtml";
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/login-form-07/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="~/login-form-07/css/owl.carousel.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/login-form-07/css/bootstrap.min.css">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="~/login-form-07/css/style.css">
+
+    <title> Online Edu Sign Up</title>
+</head>
+<body>
+
+
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="~/login-form-07/images/undraw_remotely_2j6y.svg" alt="Image" class="img-fluid">
+                </div>
+                <div class="col-md-6 contents">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="mb-4">
+                                <h3>Sign Up</h3>
+                            </div>
+                            <form method="post">
+                                <div class="form-group first">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" asp-for="FirstName">
+                                </div>
+
+                                <div class="form-group first">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" asp-for="LastName">
+                                </div>
+
+                                <div class="form-group first">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" asp-for="Email">
+                                </div>
+
+                                <div class="form-group first">
+                                    <label>Username</label>
+                                    <input type="text" class="form-control" asp-for="UserName">
+                                </div>
+
+                                <div class="form-group last mb-4">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" asp-for="Password">
+                                </div>
+
+                                <div class="form-group last mb-4">
+                                    <label>Confirm Password</label>
+                                    <input type="password" class="form-control" asp-for="ConfirmPassword">
+                                </div>
+
+                                <p style="color:red">
+                                    @Html.ValidationSummary()
+                                </p>
+
+                                <input type="submit" value="Sign Up" class="btn btn-block btn-primary">
+
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/login-form-07/js/jquery-3.3.1.min.js"></script>
+    <script src="~/login-form-07/js/popper.min.js"></script>
+    <script src="~/login-form-07/js/bootstrap.min.js"></script>
+    <script src="~/login-form-07/js/main.js"></script>
+</body>
+</html>
+
+@* <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<div class="container">
+<form method="post">
+
+    <label>First Name</label>
+    <input type="text" asp-for="FirstName" class="form-control" />
+    <br />
+
+    <label>Last Name</label>
+    <input type="text" asp-for="LastName" class="form-control" />
+    <br />
+
+    <label>User Name</label>
+    <input type="text" asp-for="UserName" class="form-control" />
+    <br />
+    <label>Email</label>
+    <input type="text" asp-for="Email" class="form-control" />
+    <br />
+    <label>Password</label>
+    <input type="password" asp-for="Password" class="form-control" />
+    <br />
+
+    <label>Confirm Password</label>
+    <input type="password" asp-for="ConfirmPassword" class="form-control" />
+    <br />
+
+    <p class="text-danger">
+        @Html.ValidationSummary()
+    </p>
+
+    <button class="btn btn-primary">Register</button>
+
+</form>
+</div> *@

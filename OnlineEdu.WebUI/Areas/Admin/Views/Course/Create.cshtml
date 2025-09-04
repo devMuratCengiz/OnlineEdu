@@ -1,0 +1,32 @@
+﻿@model CreateCourseDto
+@{
+    ViewData["Title"] = "Create Course";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post">
+    <label>Image Url</label>
+    <input type="text" asp-for="Image" class="form-control" />
+    <br />
+
+    <label>Name</label>
+    <input type="text" asp-for="Name" class="form-control" />
+    <br />
+
+    <label>Category</label>
+    <select asp-items="@ViewBag.courseCategories" asp-for="CourseCategoryId" class="form-control">
+        <option>Category</option>
+    </select>
+    <br />
+
+    <label>Price</label>
+    <input type="text" asp-for="Price" class="form-control" />
+    <br />
+
+    <label>Is Shown</label>
+    <input type="checkbox" asp-for="IsShown" class="form-check" />
+    <br />
+
+    <button class="btnbtn-outline-primary">Save</button>
+</form>
+

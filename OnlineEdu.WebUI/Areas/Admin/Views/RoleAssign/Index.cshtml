@@ -1,0 +1,29 @@
+﻿@model List<AppUser>
+@{
+    ViewData["Title"] = "User List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<table class="table table-hover">
+    <tr style="font-weight:bold;">
+        <th>#</th>
+        <th>Full Name</th>
+        <th>Username</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <th>@count</th>
+            <td>@item.FirstName @item.LastName</td>
+            <td>@item.UserName</td>
+            <td>
+                <a asp-action="AssignRole" asp-controller="RoleAssign" asp-area="Admin" asp-route-id="@item.Id" class="btn btn-outline-info">Assign Role</a>
+            </td>
+        </tr>
+    }
+</table>
+<br />
+

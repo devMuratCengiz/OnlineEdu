@@ -49,5 +49,12 @@ namespace OnlineEdu.API.Controllers
             _service.TUpdate(newValue);
             return Ok("Updated");
         }
+
+        [HttpGet("GetActiveCategories")]
+        public IActionResult GetActiveCategories()
+        {
+            var values = _service.TGetFilteredList(x => x.IsShown == true);
+            return Ok(values);
+        }
     }
 }
