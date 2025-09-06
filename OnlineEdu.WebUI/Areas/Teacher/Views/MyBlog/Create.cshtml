@@ -1,0 +1,29 @@
+﻿@model CreateBlogDto
+@{
+    ViewData["Title"] = "Create Blog";
+    Layout = "~/Areas/Teacher/Views/TeacherLayout/Index.cshtml";
+}
+
+<form method="post">
+
+    <label>Title</label>
+    <input type="text" asp-for="Title" class="form-control" />
+    <br />
+
+    <label>Image Url</label>
+    <input type="text" asp-for="ImageUrl" class="form-control" />
+    <br />
+
+    <label>Category</label>
+    <select asp-items="@ViewBag.categories" asp-for="BlogCategoryId" class="form-control">
+        <option>Categories</option>
+    </select>
+    <br />
+
+    <label>Content</label>
+    <textarea type="text" asp-for="Content" rows="5" class="form-control"></textarea>
+    <br />
+
+    <button class="btn btn-outline-primary">Add</button>
+
+</form>
