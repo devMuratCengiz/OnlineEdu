@@ -1,0 +1,32 @@
+﻿@model CreateTestimonialDto
+@{
+    ViewData["Title"] = "Create Testimonial";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post">
+
+    <label>Full Name</label>
+    <input type="text" asp-for="FullName" class="form-control" />
+    <br />
+
+    <label>Title</label>
+    <input type="text" asp-for="Title" class="form-control" />
+    <br />
+
+    <label>Image</label>
+    <input type="text" asp-for="ImageUrl" class="form-control" />
+    <br />
+
+    <label>Comment</label>
+    <textarea type="text" asp-for="Comment" class="form-control" rows="5"></textarea>
+    <br />
+
+    <label>Star</label>
+    <input type="number" asp-for="Star" class="form-control" />
+    <br />
+
+
+    <button class="btn btn-outline-primary">Add</button>
+
+</form>

@@ -18,5 +18,6 @@ namespace OnlineEdu.Entity.Entities
 
         public List<CourseRegister> CourseRegisters { get; set; }
         public List<Blog> Blogs { get; set; }
+        public List<TeacherSocial> TeachersSocials { get; set; }
     }
 }
