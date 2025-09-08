@@ -56,5 +56,12 @@ namespace OnlineEdu.API.Controllers
             var mappedValues = _mapper.Map<List<ResultBlogDto>>(values);
             return Ok(mappedValues);
         }
+
+        [HttpGet("GetCount")]
+        public IActionResult GetCount()
+        {
+            var count = _service.TCount();
+            return Ok(count);
+        }
     }
 }

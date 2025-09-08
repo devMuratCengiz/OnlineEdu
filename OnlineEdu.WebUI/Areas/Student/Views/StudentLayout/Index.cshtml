@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -15,7 +14,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="~/matrix-Admin-master/assets/images/favicon.png">
-    <title>Teacher Panel - OnlineEdu</title>
+    <title>Student Panel - OnlineEdu</title>
     <!-- Custom CSS -->
     <link href="~/matrix-Admin-master/assets/libs/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
     <link href="~/matrix-Admin-master/dist/css/style.min.css" rel="stylesheet">
@@ -237,13 +236,10 @@
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/Teacher/Dashboard/Index" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="MyProfile" asp-area="Teacher" asp-action="Index" aria-expanded="false"><i class="mdi mdi-format-list-bulleted"></i><span class="hide-menu">About</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="MyProfile" asp-area="Student" asp-action="Index" aria-expanded="false"><i class="mdi mdi-format-list-bulleted"></i><span class="hide-menu">About</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="MyBlog" asp-area="Teacher" asp-action="Index" aria-expanded="false"><i class="mdi mdi-newspaper"></i><span class="hide-menu">Blog</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="MyCourse" asp-area="Teacher" asp-action="Index" aria-expanded="false"><i class="mdi mdi-bulletin-board"></i><span class="hide-menu">Course</span></a></li>
-
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="MySocialMedia" asp-area="Teacher" asp-action="Index" aria-expanded="false"><i class="mdi mdi-bulletin-board"></i><span class="hide-menu">SocialMedia</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="CourseRegister" asp-area="Student" asp-action="Index" aria-expanded="false"><i class="mdi mdi-bulletin-board"></i><span class="hide-menu">Course</span></a></li>
 
                     </ul>
                 </nav>

@@ -49,5 +49,12 @@ namespace OnlineEdu.API.Controllers
             _service.TUpdate(newValue);
             return Ok("Updated");
         }
+
+        [HttpGet("GetCount")]
+        public IActionResult GetCount()
+        {
+            var count = _service.TCount();
+            return Ok(count);
+        }
     }
 }

@@ -1,0 +1,56 @@
+﻿@model List<ResultCourseRegisterDto>
+@{
+    ViewData["Title"] = "CourseRegister";
+    Layout = "~/Areas/Student/Views/StudentLayout/Index.cshtml";
+    int count = 0;
+}
+
+
+<table class="table table-hover">
+    <tr style="font-weight:bold;">
+        <th>#</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <th>@count</th>
+            <td><img src="@item.Course.Image" style="height:75px;width:75px" /></td>
+            <td>@item.Course.Name</td>
+            <td>@item.Course.CourseCategory.Name</td>
+            <td>@item.Course.Price</td>
+            <td>
+                <button onclick="deleteItem(@item.Id)" class="btn btn-outline-danger">Delete</button>
+                <a asp-action="Update" asp-controller="CourseRegister" asp-area="Student" asp-route-id="@item.Id" class="btn btn-outline-info">Update</a>
+            </td>
+        </tr>
+    }
+</table>
+<br />
+<a asp-action="RegisterCourse" asp-controller="CourseRegister" asp-area="Student" class="btn btn-outline-primary">Add</a>
+
+<script>
+
+    function deleteItem(id){
+        Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+
+        var controllerName = "@ViewData["Title"]"
+        window.location.href = "/Student/"+controllerName+"/Delete/" + id;
+
+    });
+    }
+</script>
+

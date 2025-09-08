@@ -56,5 +56,12 @@ namespace OnlineEdu.API.Controllers
             var values = _service.TGetFilteredList(x => x.IsShown == true);
             return Ok(values);
         }
+
+        [HttpGet("GetCount")]
+        public IActionResult GetCount()
+        {
+            var count = _service.TCount();
+            return Ok(count);
+        }
     }
 }
