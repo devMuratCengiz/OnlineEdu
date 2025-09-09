@@ -13,7 +13,8 @@ namespace OnlineEdu.WebUI.Mappings
             CreateMap<AppRole, ResultRoleDto>().ReverseMap();
             CreateMap<AppRole, CreateRoleDto>().ReverseMap();
             CreateMap<AppRole, UpdateRoleDto>().ReverseMap();
-            CreateMap<AppUser, ResultUserDto>().ReverseMap();
+            CreateMap<AppUser, ResultUserDto>()
+    .ForMember(dest => dest.TeacherSocials, opt => opt.MapFrom(src => src.TeachersSocials));
 
             CreateMap<TeacherSocial,ResultTeacherSocialDto>().ReverseMap();
         }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OnlineEdu.DataAccess.Context;
 using OnlineEdu.Entity.Entities;
 using OnlineEdu.WebUI.DTOs.UserDtos;
 
@@ -45,6 +46,14 @@ namespace OnlineEdu.WebUI.Services.UserServices
         {
             var users = await _userManager.Users.Include(x=>x.TeachersSocials).ToListAsync();
             var teachers = users.Where(user => _userManager.IsInRoleAsync(user, "Teacher").Result).OrderByDescending(x=>x.Id).Take(4).ToList();
+            var mappedList = _mapper.Map<List<ResultUserDto>>(teachers);
+            return mappedList;
+        }
+
+        public async Task<List<ResultUserDto>> GetAllTeachers()
+        {
+            var users = await _userManager.Users.Include(x => x.TeachersSocials).ToListAsync();
+            var teachers = users.Where(user => _userManager.IsInRoleAsync(user, "Teacher").Result).ToList();
             var mappedList = _mapper.Map<List<ResultUserDto>>(teachers);
             return mappedList;
         }
