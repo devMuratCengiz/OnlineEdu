@@ -26,5 +26,10 @@ namespace OnlineEdu.DataAccess.Concrete
         {
             return _context.Blogs.Include(x => x.BlogCategory).Where(x => x.WriterId == id).ToList() ;
         }
+
+        public Blog GetBlogWithCategory(int id)
+        {
+            return _context.Blogs.Include(x => x.BlogCategory).Include(x => x.Writer).ThenInclude(x=>x.TeachersSocials).FirstOrDefault(x=>x.Id == id);
+        }
     }
 }

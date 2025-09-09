@@ -22,7 +22,7 @@ namespace OnlineEdu.API.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var value = _service.TGetById(id);
+            var value = _service.TGetBlogWithCategory(id);
             var mappedValue = _mapper.Map<ResultBlogDto>(value);
             return Ok(mappedValue);
         }
