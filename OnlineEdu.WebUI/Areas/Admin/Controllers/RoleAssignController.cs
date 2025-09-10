@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnlineEdu.Entity.Entities;
 using OnlineEdu.WebUI.DTOs.UserDtos;
+using OnlineEdu.WebUI.Models;
 using OnlineEdu.WebUI.Services.UserServices;
 using System.Threading.Tasks;
 
@@ -16,7 +17,15 @@ namespace OnlineEdu.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var values = await _service.GetAllUsersAsync();
-            return View(values);
+            var userList = (from user in values
+                            select new UserViewModel
+                            {
+                                Id = user.Id,
+                                NameSurname = user.FirstName + " " + user.LastName,
+                                UserName = user.UserName,
+                                Roles = _userManager.GetRolesAsync(user).Result.ToList()
+                            }).ToList();
+            return View(userList);
         }
 
         [HttpGet]

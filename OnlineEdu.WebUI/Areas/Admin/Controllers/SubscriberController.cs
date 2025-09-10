@@ -33,18 +33,5 @@ namespace OnlineEdu.WebUI.Areas.Admin.Controllers
             await _client.PostAsJsonAsync("subscribers", createSubscriberDto);
             return RedirectToAction(nameof(Index));
         }
-
-        public async Task<IActionResult> Update(int id)
-        {
-            var value = await _client.GetFromJsonAsync<UpdateSubscriberDto>("subscribers/" + id);
-            return View(value);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Update(UpdateSubscriberDto updateSubscriberDto)
-        {
-            await _client.PutAsJsonAsync("subscribers", updateSubscriberDto);
-            return RedirectToAction(nameof(Index));
-        }
     }
 }
