@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEdu.Business.Abstract;
@@ -7,10 +8,12 @@ using OnlineEdu.Entity.Entities;
 
 namespace OnlineEdu.API.Controllers
 {
+    [Authorize(Roles = "Admin, Teacher")]
     [Route("api/[controller]")]
     [ApiController]
     public class TeacherSocialsController(IGenericService<TeacherSocial> _service, IMapper _mapper) : ControllerBase
     {
+        [AllowAnonymous]
         [HttpGet("GetSocialByTeacherId/{id}")]
         public IActionResult GetSocialByTeacherId(int id)
         {

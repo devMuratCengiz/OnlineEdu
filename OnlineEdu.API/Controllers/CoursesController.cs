@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineEdu.Business.Abstract;
@@ -8,10 +9,12 @@ using OnlineEdu.Entity.Entities;
 
 namespace OnlineEdu.API.Controllers
 {
+    [Authorize(Roles = "Admin, Teacher, Student")]
     [Route("api/[controller]")]
     [ApiController]
     public class CoursesController(ICourseService _service, IMapper _mapper) : ControllerBase
     {
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Get()
         {
@@ -20,6 +23,7 @@ namespace OnlineEdu.API.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -50,6 +54,7 @@ namespace OnlineEdu.API.Controllers
             return Ok("Updated");
         }
 
+        [AllowAnonymous]
         [HttpGet("GetActiveCourses")]
         public IActionResult GetActiveCourses()
         {
@@ -66,6 +71,7 @@ namespace OnlineEdu.API.Controllers
             return Ok(values);
         }
 
+        [AllowAnonymous]
         [HttpGet("GetAllCoursesWithCategories")]
         public IActionResult GetAllCoursesWithCategories()
         {
@@ -73,6 +79,7 @@ namespace OnlineEdu.API.Controllers
             return Ok(values);
         }
 
+        [AllowAnonymous]
         [HttpGet("GetCount")]
         public IActionResult GetCount()
         {
@@ -80,6 +87,7 @@ namespace OnlineEdu.API.Controllers
             return Ok(count);
         }
 
+        [AllowAnonymous]
         [HttpGet("GetCoursesByCategoryId/{id}")]
         public IActionResult GetCoursesByCategoryId(int id)
         {

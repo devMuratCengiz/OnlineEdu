@@ -1,11 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
+using OnlineEdu.WebUI.DTOs.LoginDtos;
 using OnlineEdu.WebUI.DTOs.UserDtos;
+using OnlineEdu.WebUI.Helpers;
 using OnlineEdu.WebUI.Services.UserServices;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace OnlineEdu.WebUI.Controllers
 {
-    public class LoginController(IUserService _service) : Controller
+    public class LoginController : Controller
     {
+        private readonly HttpClient _client = HttpClientInstance.CreateClient();
         public IActionResult SignIn()
         {
             return View();
@@ -14,22 +21,38 @@ namespace OnlineEdu.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> SignIn(UserLoginDto userLoginDto)
         {
-            var userRole = await _service.LoginAsync(userLoginDto);
-            if (userRole == "Admin")
-                return RedirectToAction("Index", "About", new { area = "Admin" });
-            if (userRole == "Teacher")
-                return RedirectToAction("Index", "MyCourse", new { area = "Teacher" });
-            if (userRole == "Student")
-                return RedirectToAction("Index", "CourseRegister", new { area = "Student" });
+            var result = await _client.PostAsJsonAsync("users/login",userLoginDto);
+            if (!result.IsSuccessStatusCode)
+            {
+                ModelState.AddModelError("", "Username or password is incorrect.");
+                return View(userLoginDto);
+            }
 
-            ModelState.AddModelError("", "Email or password is incorrect");
-            return View();
+            var handler = new JwtSecurityTokenHandler();
+            var response = await result.Content.ReadFromJsonAsync<LoginResponseDto>();
+            var token = handler.ReadJwtToken(response.Token);
+            var claims = token.Claims.ToList();
 
+            if(response.Token != null)
+            {
+                claims.Add(new Claim("Token", response.Token));
+                var claimstIdentity = new ClaimsIdentity(claims, JwtBearerDefaults.AuthenticationScheme);
+                var authProps = new AuthenticationProperties
+                {
+                    ExpiresUtc = response.ExpireDate,
+                    IsPersistent = true
+                };
+                await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal(claimstIdentity), authProps);
+
+                return RedirectToAction("Index", "Home");
+            }
+            ModelState.AddModelError("", "Username or password is incorrect.");
+            return View(userLoginDto);
         }
 
         public async Task<IActionResult> LogOut()
         {
-            await _service.LogoutAsync();
+            await HttpContext.SignOutAsync();
             return RedirectToAction("Index","Home");
         }
 
