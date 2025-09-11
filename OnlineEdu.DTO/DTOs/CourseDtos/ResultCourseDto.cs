@@ -16,6 +16,7 @@ namespace OnlineEdu.DTO.DTOs.CourseDtos
         public decimal Price { get; set; }
         public bool IsShown { get; set; }
         public int AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
 
         public int CourseCategoryId { get; set; }
         public ResultCourseCategoryDto CourseCategory { get; set; }

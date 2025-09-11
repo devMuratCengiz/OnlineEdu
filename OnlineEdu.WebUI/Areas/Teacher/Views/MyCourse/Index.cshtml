@@ -26,6 +26,8 @@
             <td>
                 <button onclick="deleteItem(@item.Id)" class="btn btn-outline-danger">Delete</button>
                 <a asp-action="Update" asp-controller="MyCourse" asp-area="Teacher" asp-route-id="@item.Id" class="btn btn-outline-info">Update</a>
+
+                <a asp-action="CourseVideos" asp-controller="MyCourse" asp-area="Teacher" asp-route-id="@item.Id" class="btn btn-outline-info">Course Videos</a>
             </td>
         </tr>
     }

@@ -11,6 +11,7 @@
         <th>Image</th>
         <th>Name</th>
         <th>Category</th>
+        <th>Teacher</th>
         <th>Price</th>
         <th>Is Shown</th>
     </tr>
@@ -22,7 +23,8 @@
             <th>@count</th>
             <td><img src="@item.Image" style="height:75px;width:75px" /></td>
             <td>@item.Name</td>
-            <td>@item.CourseCategory</td>
+            <td>@item.CourseCategory.Name</td>
+            <td>@item.AppUser.FirstName @item.AppUser.LastName</td>
             <td>@item.Price</td>
             <td>@item.IsShown</td>
             <td>
