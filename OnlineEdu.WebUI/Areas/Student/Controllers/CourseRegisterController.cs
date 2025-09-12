@@ -2,23 +2,30 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using OnlineEdu.Entity.Entities;
 using OnlineEdu.WebUI.DTOs.CourseDtos;
 using OnlineEdu.WebUI.DTOs.CourseRegisterDtos;
 using OnlineEdu.WebUI.DTOs.CourseVideoDtos;
 using OnlineEdu.WebUI.Helpers;
+using OnlineEdu.WebUI.Services.TokenServices;
 
 namespace OnlineEdu.WebUI.Areas.Student.Controllers
 {
     [Authorize(Roles ="Student")]
     [Area("Student")]
-    public class CourseRegisterController(UserManager<AppUser> _userManager) : Controller
+    public class CourseRegisterController : Controller
     {
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
+        private readonly HttpClient _client;
+        private readonly ITokenService _tokenService;
+
+        public CourseRegisterController(ITokenService tokenService,IHttpClientFactory clientFactory)
+        {
+            _tokenService = tokenService;
+            _client = clientFactory.CreateClient("EduClient");
+        }
         public async Task<IActionResult> Index()
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            var result = await _client.GetFromJsonAsync<List<ResultCourseRegisterDto>>("courseRegisters/GetMyCourses/"+user.Id);
+            var userId = _tokenService.GetUserId;
+            var result = await _client.GetFromJsonAsync<List<ResultCourseRegisterDto>>("courseRegisters/GetMyCourses/"+userId);
             return View(result);
         }
 
@@ -46,8 +53,8 @@ namespace OnlineEdu.WebUI.Areas.Student.Controllers
                                                 Value = x.Id.ToString()
                                             }).ToList();
             ViewBag.courses = courses;
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            createCourseRegisterDto.AppUserId = user.Id;
+            var userId = _tokenService.GetUserId;
+            createCourseRegisterDto.AppUserId = userId;
             await _client.PostAsJsonAsync("courseRegisters", createCourseRegisterDto);
             return RedirectToAction("Index");
         }

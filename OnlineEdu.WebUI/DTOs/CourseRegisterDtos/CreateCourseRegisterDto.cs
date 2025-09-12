@@ -1,12 +1,4 @@
-﻿using OnlineEdu.Entity.Entities;
-using OnlineEdu.WebUI.DTOs.CourseDtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineEdu.WebUI.DTOs.CourseRegisterDtos
+﻿namespace OnlineEdu.WebUI.DTOs.CourseRegisterDtos
 {
     public class CreateCourseRegisterDto
     {

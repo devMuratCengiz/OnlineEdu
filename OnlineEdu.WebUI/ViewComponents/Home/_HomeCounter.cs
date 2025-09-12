@@ -4,9 +4,14 @@ using OnlineEdu.WebUI.Services.UserServices;
 
 namespace OnlineEdu.WebUI.ViewComponents.Home
 {
-    public class _HomeCounter(IUserService _userService) : ViewComponent
+    public class _HomeCounter : ViewComponent
     {
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
+        private readonly HttpClient _client;
+
+        public _HomeCounter(IHttpClientFactory clientFactory)
+        {
+            _client = clientFactory.CreateClient("EduClient");
+        }
         public async Task<IViewComponentResult> InvokeAsync()
         {
             ViewBag.blogCount = await _client.GetFromJsonAsync<int>("blogs/GetCount");

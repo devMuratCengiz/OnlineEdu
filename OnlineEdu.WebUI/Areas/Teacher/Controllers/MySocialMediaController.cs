@@ -1,19 +1,25 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using OnlineEdu.Entity.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnlineEdu.WebUI.DTOs.TeacherSocialDtos;
-using OnlineEdu.WebUI.Helpers;
+using OnlineEdu.WebUI.Services.TokenServices;
 
 namespace OnlineEdu.WebUI.Areas.Teacher.Controllers
 {
     [Area("Teacher")]
-    public class MySocialMediaController(UserManager<AppUser> _userManager) : Controller
+    public class MySocialMediaController : Controller
     {
-        private readonly HttpClient _client = HttpClientInstance.CreateClient();
+        private readonly HttpClient _client;
+        private readonly ITokenService _tokenService;
+
+        public MySocialMediaController(HttpClient client, ITokenService tokenService)
+        {
+            _client = client;
+            _tokenService = tokenService;
+        }
+
         public async Task<IActionResult> Index()
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            var values = await _client.GetFromJsonAsync<List<ResultTeacherSocialDto>>("teacherSocials/GetSocialByTeacherId/" + user.Id );
+            var userId = _tokenService.GetUserId;
+            var values = await _client.GetFromJsonAsync<List<ResultTeacherSocialDto>>("teacherSocials/GetSocialByTeacherId/" + userId );
             return View(values);
         }
 
@@ -31,8 +37,8 @@ namespace OnlineEdu.WebUI.Areas.Teacher.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateTeacherSocialDto createTeacherSocialDto)
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            createTeacherSocialDto.TeacherId = user.Id;
+            var userId = _tokenService.GetUserId;
+            createTeacherSocialDto.TeacherId = userId;
             await _client.PostAsJsonAsync("teacherSocials", createTeacherSocialDto);
             return RedirectToAction(nameof(Index));
         }
@@ -46,8 +52,8 @@ namespace OnlineEdu.WebUI.Areas.Teacher.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(UpdateTeacherSocialDto updateTeacherSocialDto)
         {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            updateTeacherSocialDto.TeacherId = user.Id;
+            var userId = _tokenService.GetUserId;
+            updateTeacherSocialDto.TeacherId = userId;
             await _client.PutAsJsonAsync("teacherSocials", updateTeacherSocialDto);
             return RedirectToAction(nameof(Index));
         }
